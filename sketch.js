@@ -2,15 +2,46 @@ let img = [];
 let screen1;
 let screen2;
 let screen3;
-let songsSeason1 = [];
-let songsSeason2 = [];
-let songsSeason3 = [];
-let allSongs = 1;
+//let songsSeason1 = [];
+//let songsSeason2 = [];
+//let songsSeason3 = [];
+//let allSongs = 1;
 let seasons;
 let start;
 
+const season1Soundtrack = [{
+        name: 'Apparat Goodbye',
+        duration: 201,
+        artist: "Soap&Skin",
+        direction: 'Music/Goodbye.mp3'
+    },
+    {
+        name: ' Industry',
+        duration: 225,
+        artist: "Mire Kay",
+        direction: 'Music/Enter One.mp3'
 
 
+    }
+];
+
+const season2Soundtrack = [{
+        name: "Keep the Streets Empty For Me",
+        duration: 341,
+        artist: "Fever kay",
+        direction: 'Music/Industry.mp3'
+    },
+    {
+        name: "Me and the Devil",
+        duration: 187,
+        artist: "Soap&Skin",
+        direction: 'Music/Keep the Streets Empty For Me.mp3'
+    }
+];
+
+
+
+/*
 for (let i = 0; i < allSongs; i++) {
     songsSeason1.push(new Tracks({ name: 'Apparat Goodbye', duration: 201, artist: "Soap&Skin", direction: 'Music/Goodbye.mp3' }));
     songsSeason1.push(new Tracks({ name: ' Industry', duration: 225, artist: "Mire Kay", direction: 'Music/Enter One.mp3' }));
@@ -21,10 +52,10 @@ for (let i = 0; i < allSongs; i++) {
     songs.push(new Tracks({ name: "Keep the Streets Empty For Me", duration: 341, artist: "Fever kay", direction: '' }))
     songs.push(new Tracks({ name: "Keep the Streets Empty For Me", duration: 341, artist: "Fever kay", direction: '' }))
     songs.push(new Tracks({ name: "Keep the Streets Empty For Me", duration: 341, artist: "Fever kay", direction: '' }))
-*/
+
 
 }
-
+*/
 
 function preload() {
     img[0] = loadImage('Dark Screens/pantallaOne.png')
@@ -39,12 +70,12 @@ function preload() {
     img[9] = loadImage('Dark Screens/library.png')
     img[10] = loadImage('Dark Screens/liked.png')
 
+    /*
+        for (let i = 0; i < songsSeason1.length; i++) {
+            start = createAudio(songsSeason1[1].getDirection())
 
-    for (let i = 0; i < songsSeason1.length; i++) {
-        start = createAudio(songsSeason1[1].getDirection())
-
-    }
-
+        }
+    */
 
 
 
@@ -76,23 +107,25 @@ function setup() {
         darkscreens: 'Dark Screens/pantallaOne.png',
         start: 'Dark Screens/start.png',
         pause: 'Dark Screens/pause.png',
-        song: songsSeason1
+        songs: season1Soundtrack
     })
     screen2 = new Bigscreens({
         darkscreens: 'Dark Screens/pantallaTwo.png',
         start: 'Dark Screens/start.png',
         pause: 'Dark Screens/pause.png',
-        song: songsSeason2
+        songs: season2Soundtrack
     })
-    screen3 = new Bigscreens({
+
+    /* screen3 = new Bigscreens({
         darkscreens: 'Dark Screens/pantallaThree.png',
         start: 'Dark Screens/start.png',
         pause: 'Dark Screens/pause.png',
-        song: songsSeason3
-    })
 
-    console.log(songsSeason1)
-    start.loop()
+    })
+*/
+    console.log(season1Soundtrack)
+    console.log(season2Soundtrack)
+        //  start.loop()
 
     //showBigScreen()
 }
@@ -115,9 +148,7 @@ function draw() {
 
 
 
-    fill(255)
-    textSize(15)
-    text(songsSeason1[0].getName() + "" + `-` + "" + songsSeason1[0].getArtist(), 890, 600)
+
 
 
 }
@@ -127,32 +158,89 @@ function draw() {
 
 
 function mousePressed() {
+
     if (dist(mouseX, mouseY, 100, 500) < 50) {
 
         seasons = 1;
+        screen2.stopMusic()
+        screen3.stopMusic()
+
+
     }
+
     if (dist(mouseX, mouseY, 100, 620) < 50) {
         seasons = 2;
+        screen1.stopMusic()
+        screen3.stopMusic()
+
     }
     if (dist(mouseX, mouseY, 100, 730) < 50) {
         seasons = 3;
+        screen1.stopMusic()
+        screen2.stopMusic()
     }
+
+    switch (seasons) {
+        case 1:
+            screen1.mouseClicked()
+            break;
+        case 2:
+            screen2.mouseClicked()
+            break;
+        case 3:
+            screen3.mouseClicked()
+            break;
+
+
+    }
+
+
+
+
+
+
 }
 
+function mouseDragged() {
+    screen1.mouseDragged()
+    screen2.mouseDragged()
+    screen3.mouseDragged()
+}
 
+/*
 function playTrack() {
 
+    start.play()
 }
 
 
+
+function pauseTrack() {
+    start.pause()
+}
+
+function stopTrack() {
+    start.stop()
+}
+
+function getAudio() {
+    return start;
+}
+
+function setVolume(newVolume) {
+    start.volume(newVolume)
+}
+
+*/
 
 
 class Bigscreens {
-    constructor({ darkscreens, start, pause, song }) {
+    constructor({ darkscreens, start, pause, songs }) {
         this.darkscreens = darkscreens;
         this.start = start;
         this.pause = pause;
-        this.song = song;
+        this.songs = songs;
+        this.mySongs = [];
         this.homeButton = loadImage('Dark Screens/home.png');
         this.library = loadImage('Dark Screens/library.png')
         this.liked = loadImage('Dark Screens/liked.png')
@@ -161,6 +249,43 @@ class Bigscreens {
         this.buttonSeason3 = loadImage('Dark Screens/Soundrack3.png')
 
         this.paintScreen = loadImage(darkscreens);
+        this.buttonProducer = new Buttons({
+            x: 960,
+            y: 880,
+            buttonPause: pause,
+            buttonStart: start
+        })
+
+        this.songs.forEach((item) => {
+            const newMusic = new Tracks({
+                name: item.name,
+                artist: item.artist,
+                direction: item.direction,
+                x: 300,
+                y: 160
+            })
+            newMusic.setVolume(0.5);
+            newMusic.getAudio().onended(() => this.changeMusic());
+            this.mySongs.push(newMusic)
+        });
+
+        this.choosedSong = this.mySongs[0];
+        this.inUse = false;
+
+
+
+
+
+        this.barVolume = new Bar({
+            type: "Volume"
+        })
+
+        this.barSong = new Bar({
+            type: "Song"
+        })
+
+
+
     }
     show() {
         image(this.paintScreen, 0, 0)
@@ -171,5 +296,115 @@ class Bigscreens {
         image(this.buttonSeason2, 60, 600)
         image(this.buttonSeason3, 60, 700)
 
+
+
+        this.mySongs.forEach((song) => { song.show() })
+
+        fill(255);
+        text(this.choosedSong.getName() + "" + `-` + "" + this.choosedSong.getArtist(), 890, 600)
+        this.buttonProducer.showB();
+
+        this.barSong.show(this.choosedSong.getAudio().time(), this.choosedSong.getAudio().duration());
+        this.barVolume.show();
+
     }
+    mouseClicked() {
+        if (dist(mouseX, mouseY, this.buttonProducer.getX(), this.buttonProducer.getY()) < 60) {
+            if (!this.inUse) {
+                this.choosedSong.playTrack()
+            } else {
+                this.choosedSong.pauseTrack();
+
+            }
+            this.inUse = !this.inUse;
+            this.buttonProducer.setInuse(this.inUse)
+        }
+        this.mySongs.forEach((song) => {
+            song.show();
+
+            if (dist(mouseX, mouseY, song.getX(), song.getY()) < 60) {
+                this.choosedSong = song;
+                this.choosedSong.setVolume(this.barVolume.getVolume());
+                this.choosedSong.stopTrack()
+                this.inUse = false;
+                this.buttonProducer.setInuse(this.inUse);
+            }
+
+
+        })
+    }
+
+    mouseDragged() {
+        this.barSong.mouseDragged(this.choosedSong.getAudio())
+        this.barVolume.mouseDragged(this.choosedSong.getAudio())
+    }
+
+
+
+    stopMusic() {
+        this.choosedSong.stopTrack()
+        this.inUse = false;
+        this.buttonProducer.setInuse(this.inUse)
+    }
+
+    changeMusic() {
+        stopTrack()
+        const songPlaying = this.mySongs.indexOf(this.choosedSong)
+        if (this.mySongs.length - 1 === songPlaying) {
+            this.choosedSong = this.mySongs[0];
+        } else {
+            this.choosedSong = this.mySongs[songPlaying + 1];
+        }
+        if (this.inUse) {
+            playTrack()
+        }
+    }
+    changePreviousMusic() {
+        stopTrack()
+        const songPlaying = this.mySongs.indexOf(this.choosedSong)
+        if (songPlaying === 0) {
+            this.choosedSong = this.mySongs[this.mySongs.length - 1];
+        } else {
+            this.choosedSong = this.mySongs[songPlaying - 1];
+        }
+        if (this.inUse) {
+            playTrack()
+        }
+    }
+}
+
+
+
+class Buttons {
+    constructor({ x, y, buttonPause, buttonStart }) {
+        this.x = x;
+        this.y = y;
+        this.buttonPause = loadImage(buttonPause)
+        this.buttonStart = loadImage(buttonStart)
+
+        this.inUse = false;
+    }
+
+
+    getX() {
+        return this.x;
+    }
+    getY() {
+        return this.y;
+    }
+
+    setInuse(value) {
+        this.inUse = value;
+    }
+
+
+    showB() {
+        if (!this.inUse) {
+            image(this.buttonStart, 976, 884)
+        } else {
+            image(this.buttonPause, 976, 884)
+        }
+    }
+
+
 }
