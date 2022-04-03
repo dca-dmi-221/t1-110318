@@ -309,10 +309,10 @@ class Bigscreens {
         fill(255);
         textSize(15)
         text(this.choosedSong.getName() + "" + `-` + "" + this.choosedSong.getArtist(), 890, 600)
-        this.buttonProducer.showB();
 
-        this.barSong.show(this.choosedSong.getAudio().time(), this.choosedSong.getAudio().duration());
-        this.barVolume.show();
+        this.buttonProducer.showB();
+        this.barSong.showBar(this.choosedSong.getAudio().time(), this.choosedSong.getAudio().duration());
+        this.barVolume.showBar();
 
     }
     mouseClicked() {
@@ -323,11 +323,11 @@ class Bigscreens {
                 this.choosedSong.pauseTrack();
 
             }
-            if (dist(mouseX, mouseY, 1131, 912) < 100) {
+            if (dist(mouseX, mouseY, 1131, 912) < 10) {
                 this.changeMusic()
 
             }
-            if (dist(mouseX, mouseY, 888, 912) < 30) {
+            if (dist(mouseX, mouseY, 888, 912) < 10) {
                 this.changePreviousMusic()
 
             }

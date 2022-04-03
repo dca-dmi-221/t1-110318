@@ -32,6 +32,12 @@ class Tracks {
         this.audio.volume(newVolume)
 
     }
+    getX() {
+        return this.x
+    }
+    getY() {
+        return this.y
+    }
 
 
     getName() {

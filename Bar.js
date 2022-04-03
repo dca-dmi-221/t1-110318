@@ -2,14 +2,14 @@ class Bar {
     constructor({ type }) {
         this.type = type;
         this.x = 657;
-        this.x2 = 1346;
+        this.x2 = 1440;
 
-        if (type === "song") {
+        if (type === "Song") {
             this.y = 1029;
 
         }
-        if (type === "volume") {
-            this.y2 = 908 + 25;
+        if (type === "Volume") {
+            this.y2 = 901 + 8;
         }
         this.ballX = this.x2;
         this.ballY = this.y2;
@@ -18,25 +18,27 @@ class Bar {
 
 
     }
-    show(time, duration) {
-        fill(255, 255, 255)
+    showBar(time, duration) {
+        /* fill(255, 255, 255)
+        noStroke()
         rect(this.x, this.y, 697, 10)
+*/
 
 
 
-
-        if (this.type === "song") {
+        if (this.type === "Song") {
             const mapDuration = map(time, 0, duration, 0, 697);
             noStroke();
             fill(108, 108, 108)
-            rect(657, 1029, mapDuration, 10);
-            text(this.formatTime(time), 400, 500, )
-            text(this.formatTime(duration), 500, 600)
+            rect(657, 1029, mapDuration, 10, 5);
+            fill(255)
+            text(this.formatTime(time), 544, 1022)
+            text(this.formatTime(duration), 1414, 1022)
 
         }
-        if (this.type === "volume") {
+        if (this.type === "Volume") {
             fill(255);
-            ellipse(this.ballX, this.ballY, 12)
+            ellipse(this.ballX, this.ballY, 20)
         }
     }
 
