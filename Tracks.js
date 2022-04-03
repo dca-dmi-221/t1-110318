@@ -1,15 +1,27 @@
 class Tracks {
-    constructor({ name, duration, direction }) {
+    constructor({ name, duration, direction, artist }) {
         this.name = name;
         this.duration = duration;
+        this.artist = artist;
 
         this.direction = direction;
+        // this.aux = createAudio(direction);
 
     }
     show() {
 
     }
 
+    playTrack() {
+        this.aux.play()
+    }
+
+    pauseTrack() {
+        this.aux.pause()
+    }
+    stopTrack() {
+        this.aux.stop()
+    }
     getName() {
         return this.name
     }
@@ -36,6 +48,12 @@ class Tracks {
     getDirection() {
         return this.direction
     }
+    getArtist() {
+        return this.artist
+    }
 
+    getAux() {
+        return this.aux
+    }
 
 }
