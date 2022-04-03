@@ -144,7 +144,8 @@ function draw() {
             break;
 
     }
-
+    fill("salmon")
+    text("(" + floor(mouseX) + ", " + floor(mouseY) + ")", mouseX, mouseY);
 
 
 
@@ -247,6 +248,8 @@ class Bigscreens {
         this.buttonSeason1 = loadImage('Dark Screens/Soundrack1.png')
         this.buttonSeason2 = loadImage('Dark Screens/Soundrack2.png')
         this.buttonSeason3 = loadImage('Dark Screens/Soundrack3.png')
+        this.buttonNext = loadImage('Dark Screens/next.png')
+        this.buttonBack = loadImage('Dark Screens/back.png')
 
         this.paintScreen = loadImage(darkscreens);
         this.buttonProducer = new Buttons({
@@ -295,12 +298,16 @@ class Bigscreens {
         image(this.buttonSeason1, 60, 500)
         image(this.buttonSeason2, 60, 600)
         image(this.buttonSeason3, 60, 700)
+        image(this.buttonNext, 1118, 899)
+        image(this.buttonBack, 888, 899)
+
 
 
 
         this.mySongs.forEach((song) => { song.show() })
 
         fill(255);
+        textSize(15)
         text(this.choosedSong.getName() + "" + `-` + "" + this.choosedSong.getArtist(), 890, 600)
         this.buttonProducer.showB();
 
@@ -316,22 +323,37 @@ class Bigscreens {
                 this.choosedSong.pauseTrack();
 
             }
-            this.inUse = !this.inUse;
-            this.buttonProducer.setInuse(this.inUse)
-        }
-        this.mySongs.forEach((song) => {
-            song.show();
+            if (dist(mouseX, mouseY, 1131, 912) < 100) {
+                this.changeMusic()
 
-            if (dist(mouseX, mouseY, song.getX(), song.getY()) < 60) {
-                this.choosedSong = song;
-                this.choosedSong.setVolume(this.barVolume.getVolume());
-                this.choosedSong.stopTrack()
-                this.inUse = false;
-                this.buttonProducer.setInuse(this.inUse);
+            }
+            if (dist(mouseX, mouseY, 888, 912) < 30) {
+                this.changePreviousMusic()
+
             }
 
 
-        })
+
+
+
+
+
+            this.inUse = !this.inUse;
+            this.buttonProducer.setInuse(this.inUse)
+            this.mySongs.forEach((song) => {
+                song.show();
+
+                if (dist(mouseX, mouseY, song.getX(), song.getY()) < 60) {
+                    this.choosedSong = song;
+                    this.choosedSong.setVolume(this.barVolume.getVolume());
+                    this.choosedSong.stopTrack()
+                    this.inUse = false;
+                    this.buttonProducer.setInuse(this.inUse);
+                }
+
+
+            })
+        }
     }
 
     mouseDragged() {
@@ -348,7 +370,8 @@ class Bigscreens {
     }
 
     changeMusic() {
-        stopTrack()
+        this.choosedSong.stopTrack();
+
         const songPlaying = this.mySongs.indexOf(this.choosedSong)
         if (this.mySongs.length - 1 === songPlaying) {
             this.choosedSong = this.mySongs[0];
@@ -356,7 +379,7 @@ class Bigscreens {
             this.choosedSong = this.mySongs[songPlaying + 1];
         }
         if (this.inUse) {
-            playTrack()
+            this.choosedSong.playTrack()
         }
     }
     changePreviousMusic() {
