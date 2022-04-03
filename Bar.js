@@ -19,10 +19,7 @@ class Bar {
 
     }
     showBar(time, duration) {
-        /* fill(255, 255, 255)
-        noStroke()
-        rect(this.x, this.y, 697, 10)
-*/
+
 
 
 
