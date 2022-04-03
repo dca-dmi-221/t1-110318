@@ -3,16 +3,17 @@ class Bar {
         this.type = type;
         this.x = 657;
         this.x2 = 1440;
+        this.x3 = 1346;
 
         if (type === "Song") {
             this.y = 1029;
 
         }
         if (type === "Volume") {
-            this.y2 = 901 + 8;
+            this.y = 1029 + 8;
         }
-        this.ballX = this.x2;
-        this.ballY = this.y2;
+        this.ballX = 1440;
+        this.ballY = 901 + 8;
         this.volume = 0.5;
 
 
@@ -43,23 +44,31 @@ class Bar {
         const bonderies = {
             x1: this.x,
             x2: this.x + 697,
+            x1B: this.x3,
+            x2B: this.x3 + 208,
+            y1B: 901,
+            y2B: 901 + 8,
             y1: this.y - 2,
             y2: this.y + 10 + 2
 
         }
         const inRange = mouseX > bonderies.x1 && mouseX < bonderies.x2 && mouseY > bonderies.y1 && mouseY < bonderies.y2;
         if (inRange) {
-            if (this.type === "volume") {
-                this.volume = map(mouseX, bonderies.x1, bonderies.x2, 0, 100) / 100;
-                song.volume(this.volume);
-                this.bolaX = mouseX;
-            } else if (this.type === "song") {
+            if (this.type === "Song") {
                 const head = map(mouseX, bonderies.x1, bonderies.x2, 0, song.duration())
                 song.time(head)
             }
         }
-    }
 
+        const inrangeVol = mouseX > bonderies.x1B && mouseX < bonderies.x2B && mouseY > bonderies.y1B && mouseY < bonderies.y2B;
+        if (inrangeVol) {
+            if (this.type === "Volume") {
+                this.volume = map(mouseX, bonderies.x1B, bonderies.x2B, 0, 100) / 100;
+                song.volume(this.volume);
+                this.ballX = mouseX;
+            }
+        }
+    }
     getVolume() {
         return this.volume
     }

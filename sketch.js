@@ -188,10 +188,10 @@ function mousePressed() {
         case 2:
             screen2.mouseClicked()
             break;
-        case 3:
+            /* case 3:
             screen3.mouseClicked()
             break;
-
+*/
 
     }
 
@@ -205,7 +205,7 @@ function mousePressed() {
 function mouseDragged() {
     screen1.mouseDragged()
     screen2.mouseDragged()
-    screen3.mouseDragged()
+        //  screen3.mouseDragged()
 }
 
 /*
