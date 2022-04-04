@@ -208,31 +208,7 @@ function mouseDragged() {
         //  screen3.mouseDragged()
 }
 
-/*
-function playTrack() {
 
-    start.play()
-}
-
-
-
-function pauseTrack() {
-    start.pause()
-}
-
-function stopTrack() {
-    start.stop()
-}
-
-function getAudio() {
-    return start;
-}
-
-function setVolume(newVolume) {
-    start.volume(newVolume)
-}
-
-*/
 
 
 class Bigscreens {
@@ -323,38 +299,44 @@ class Bigscreens {
                 this.choosedSong.pauseTrack();
 
             }
-            if (dist(mouseX, mouseY, 1131, 912) < 10) {
-                this.changeMusic()
-
-            }
-            if (dist(mouseX, mouseY, 888, 912) < 10) {
-                this.changePreviousMusic()
-
-            }
-
-
-
-
-
-
 
             this.inUse = !this.inUse;
             this.buttonProducer.setInuse(this.inUse)
-            this.mySongs.forEach((song) => {
-                song.show();
-
-                if (dist(mouseX, mouseY, song.getX(), song.getY()) < 60) {
-                    this.choosedSong = song;
-                    this.choosedSong.setVolume(this.barVolume.getVolume());
-                    this.choosedSong.stopTrack()
-                    this.inUse = false;
-                    this.buttonProducer.setInuse(this.inUse);
-                }
-
-
-            })
         }
+
+
+
+        if (dist(mouseX, mouseY, 1136, 912) < 100) {
+            this.changeMusic();
+            console.log("clicked")
+
+        }
+        if (dist(mouseX, mouseY, 888, 912) < 10) {
+            this.changePreviousMusic();
+
+        }
+
+
+
+
+
+
+
+        this.mySongs.forEach((song) => {
+            song.show();
+
+            if (dist(mouseX, mouseY, song.getX(), song.getY()) < 60) {
+                this.choosedSong = song;
+                this.choosedSong.setVolume(this.barVolume.getVolume());
+                this.choosedSong.stopTrack()
+                this.inUse = false;
+                this.buttonProducer.setInuse(this.inUse);
+            }
+
+
+        })
     }
+
 
     mouseDragged() {
         this.barSong.mouseDragged(this.choosedSong.getAudio())
@@ -381,9 +363,11 @@ class Bigscreens {
         if (this.inUse) {
             this.choosedSong.playTrack()
         }
+        console.log(this.changeMusic)
     }
+
     changePreviousMusic() {
-        stopTrack()
+        this.choosedSong.stopTrack()
         const songPlaying = this.mySongs.indexOf(this.choosedSong)
         if (songPlaying === 0) {
             this.choosedSong = this.mySongs[this.mySongs.length - 1];
@@ -391,10 +375,11 @@ class Bigscreens {
             this.choosedSong = this.mySongs[songPlaying - 1];
         }
         if (this.inUse) {
-            playTrack()
+            this.choosedSong.playTrack()
         }
     }
 }
+
 
 
 
