@@ -2,10 +2,6 @@ let img = [];
 let screen1;
 let screen2;
 let screen3;
-//let songsSeason1 = [];
-//let songsSeason2 = [];
-//let songsSeason3 = [];
-//let allSongs = 1;
 let seasons;
 let start;
 
@@ -22,7 +18,29 @@ const season1Soundtrack = [{
         direction: 'Music/Enter One.mp3'
 
 
+    },
+
+
+
+    {
+        name: ' A Quiet Life',
+        duration: 225,
+        artist: "Teho Teardo",
+        direction: 'Music/Quiet Life.mp3'
+
+
+    },
+    {
+        name: ' Stomper Wishing Well',
+        duration: 225,
+        artist: "Lucy Tops",
+        direction: 'Music/Wishing Well.mp3'
+
+
     }
+
+
+
 ];
 
 const season2Soundtrack = [{
@@ -36,26 +54,53 @@ const season2Soundtrack = [{
         duration: 187,
         artist: "Soap&Skin",
         direction: 'Music/Keep the Streets Empty For Me.mp3'
+    },
+    {
+        name: "Nightfall",
+        duration: 187,
+        artist: "Mimi Page",
+        direction: 'Music/NightFall.mp3'
+    },
+    {
+        name: "Roomful of Teeth",
+        duration: 187,
+        artist: "partita 8 voices No 3 courante",
+        direction: 'Music/Roomful.mp3'
     }
+
+];
+
+
+const season3Soundtrack = [{
+        name: "When I Was Done Dying",
+        duration: 341,
+        artist: "Dan Deacon",
+        direction: 'Music/Dying.mp3'
+    },
+    {
+        name: "Tear For Fears",
+        duration: 187,
+        artist: "Shout",
+        direction: 'Music/Tears of fears.mp3'
+    },
+    {
+        name: "Pleasure to Kill",
+        duration: 187,
+        artist: "Kreator",
+        direction: 'Music/Pleasure to kill.mp3'
+    },
+    {
+        name: "You spin me right round like a record",
+        duration: 187,
+        artist: "Dead or Alive",
+        direction: 'Music/DeadorAlive.mp3'
+    }
+
 ];
 
 
 
-/*
-for (let i = 0; i < allSongs; i++) {
-    songsSeason1.push(new Tracks({ name: 'Apparat Goodbye', duration: 201, artist: "Soap&Skin", direction: 'Music/Goodbye.mp3' }));
-    songsSeason1.push(new Tracks({ name: ' Industry', duration: 225, artist: "Mire Kay", direction: 'Music/Enter One.mp3' }));
-    songsSeason1.push(new Tracks({ name: "Keep the Streets Empty For Me", duration: 341, artist: "Fever kay", direction: 'Music/Industry.mp3' }))
-    songsSeason1.push(new Tracks({ name: "Me and the Devil", duration: 187, artist: "Soap&Skin", direction: 'Music/Keep the Streets Empty For Me.mp3' }))
-    songsSeason1.push(new Tracks({ name: "Enter One", duration: 341, artist: "Sol Seppy", direction: 'Music/Me and the Devil.mp3' }))
-        /* songs.push(new Tracks({ name: "Keep the Streets Empty For Me", duration: 341, artist: "Fever kay", direction: '' }))
-    songs.push(new Tracks({ name: "Keep the Streets Empty For Me", duration: 341, artist: "Fever kay", direction: '' }))
-    songs.push(new Tracks({ name: "Keep the Streets Empty For Me", duration: 341, artist: "Fever kay", direction: '' }))
-    songs.push(new Tracks({ name: "Keep the Streets Empty For Me", duration: 341, artist: "Fever kay", direction: '' }))
 
-
-}
-*/
 
 function preload() {
     img[0] = loadImage('Dark Screens/pantallaOne.png')
@@ -70,12 +115,6 @@ function preload() {
     img[9] = loadImage('Dark Screens/library.png')
     img[10] = loadImage('Dark Screens/liked.png')
 
-    /*
-        for (let i = 0; i < songsSeason1.length; i++) {
-            start = createAudio(songsSeason1[1].getDirection())
-
-        }
-    */
 
 
 
@@ -116,18 +155,18 @@ function setup() {
         songs: season2Soundtrack
     })
 
-    /* screen3 = new Bigscreens({
+    screen3 = new Bigscreens({
         darkscreens: 'Dark Screens/pantallaThree.png',
         start: 'Dark Screens/start.png',
         pause: 'Dark Screens/pause.png',
+        songs: season3Soundtrack
 
     })
-*/
+
     console.log(season1Soundtrack)
     console.log(season2Soundtrack)
-        //  start.loop()
+    console.log(season3Soundtrack)
 
-    //showBigScreen()
 }
 
 function draw() {
@@ -144,9 +183,9 @@ function draw() {
             break;
 
     }
-    fill("salmon")
+    /*fill("salmon")
     text("(" + floor(mouseX) + ", " + floor(mouseY) + ")", mouseX, mouseY);
-
+*/
 
 
 
@@ -188,10 +227,10 @@ function mousePressed() {
         case 2:
             screen2.mouseClicked()
             break;
-            /* case 3:
+        case 3:
             screen3.mouseClicked()
             break;
-*/
+
 
     }
 
@@ -205,7 +244,7 @@ function mousePressed() {
 function mouseDragged() {
     screen1.mouseDragged()
     screen2.mouseDragged()
-        //  screen3.mouseDragged()
+    screen3.mouseDragged()
 }
 
 
@@ -309,19 +348,31 @@ class Bigscreens {
         if (dist(mouseX, mouseY, 1136, 912) < 100) {
             this.changeMusic();
             console.log("clicked")
+<<<<<<< HEAD
 
         }
         if (dist(mouseX, mouseY, 888, 912) < 10) {
             this.changePreviousMusic();
 
         }
+=======
+
+        }
+        if (dist(mouseX, mouseY, 888, 912) < 10) {
+            this.changePreviousMusic();
+>>>>>>> c305ac209499f5b7afa219d43eebe0654563a74a
+
+        }
 
 
 
 
 
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> c305ac209499f5b7afa219d43eebe0654563a74a
         this.mySongs.forEach((song) => {
             song.show();
 
