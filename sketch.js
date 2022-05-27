@@ -123,7 +123,6 @@ function preload() {
 
 }
 
-
 function showBigScreen() {
     image(img[0], 0, 0)
     image(img[4], 960, 880)
@@ -133,11 +132,6 @@ function showBigScreen() {
     image(img[9], 60, 300)
     image(img[10], 60, 400)
 }
-
-
-
-
-
 
 function setup() {
     createCanvas(1920, 1080);
@@ -348,31 +342,18 @@ class Bigscreens {
         if (dist(mouseX, mouseY, 1136, 912) < 100) {
             this.changeMusic();
             console.log("clicked")
-<<<<<<< HEAD
 
         }
         if (dist(mouseX, mouseY, 888, 912) < 10) {
             this.changePreviousMusic();
 
         }
-=======
-
-        }
-        if (dist(mouseX, mouseY, 888, 912) < 10) {
-            this.changePreviousMusic();
->>>>>>> c305ac209499f5b7afa219d43eebe0654563a74a
-
-        }
 
 
 
 
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c305ac209499f5b7afa219d43eebe0654563a74a
         this.mySongs.forEach((song) => {
             song.show();
 
